@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.s17er.dev.androiddrawingsample.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/toolbar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button_color_red"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="赤"
+            />
+        <Button
+            android:id="@+id/button_color_blue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="青"
+            />
+        <Button
+            android:id="@+id/button_color_black"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="黒"
+            />
+
+        <SeekBar
+            android:id="@+id/seek_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/toolbar1"
+        >
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="clear"
+            />
+        <Button
+            android:id="@+id/button_undo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="undo"
+            />
+        <Button
+            android:id="@+id/button_redo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="redo"
+            />
+    </LinearLayout>
+
+    <com.rm.freedrawview.FreeDrawView
+        android:id="@+id/canvas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_below="@id/toolbar2"
+        />
+
+</RelativeLayout>
