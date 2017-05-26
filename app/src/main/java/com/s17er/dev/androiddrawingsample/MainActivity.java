@@ -1,13 +1,25 @@
 package com.s17er.dev.androiddrawingsample;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaScannerConnection;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.rm.freedrawview.FreeDrawView;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -97,4 +109,44 @@ public class MainActivity extends AppCompatActivity {
     public void onClickButtonBgYellow(View v) {
         canvas.setBaseColor(Color.YELLOW);
     }
+
+    @OnClick(R.id.button_save)
+    public void onClickButtonSave(View v) {
+        byte[] bArray = canvas.getBitmapAsByteArray();
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sample.bmp");
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file, true);
+            outputStream.write(bArray);
+            outputStream.flush();
+
+            // 保存した画像を端末に認識させる
+            String[] paths = new String[]{file.getPath()};
+            MediaScannerConnection.scanFile(this, paths, null, null);
+            Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("Chase", e.toString());
+        }
+    }
+
+    @OnClick(R.id.button_load)
+    public void onClickButtonLoad(View v) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sample.bmp");
+        try {
+            final InputStream inputStream = new FileInputStream(file);
+            final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            while(true) {
+                int len = inputStream.read(buffer);
+                if (len < 0) {
+                    break;
+                }
+                byteArrayOutputStream.write(buffer, 0, len);
+            }
+            canvas.drawBitmap(byteArrayOutputStream.toByteArray());
+            Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.e("Chase", e.toString());
+        }
+    }
+
 }

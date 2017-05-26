@@ -451,10 +451,8 @@ public class CanvasView extends View {
             Paint paint = this.paintLists.get(i);
 
             if (paint == null) {
-                Log.i("Chase", "this is eraser.");
                 paint = createEraserPaint();
             }
-            Log.i("Chase", String.format("color=0x%x", paint.getColor()));
             canvas.drawPath(path, paint);
         }
 

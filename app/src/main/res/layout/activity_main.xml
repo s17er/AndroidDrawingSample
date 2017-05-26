@@ -89,6 +89,18 @@
             android:layout_height="48dp"
             android:text="黄"
             />
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="save"
+            />
+        <Button
+            android:id="@+id/button_load"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="load"
+            />
     </LinearLayout>
 
     <com.s17er.dev.androiddrawingsample.CanvasView
