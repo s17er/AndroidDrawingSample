@@ -1,5 +1,6 @@
 package com.s17er.dev.androiddrawingsample;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaScannerConnection;
@@ -11,6 +12,10 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.OnColorSelectedListener;
+import com.flask.colorpicker.builder.ColorPickerClickListener;
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.rm.freedrawview.FreeDrawView;
 
 import java.io.BufferedInputStream;
@@ -66,21 +71,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.button_color_black)
-    public void onClickButtonBlack(View v) {
-        canvas.setMode(CanvasView.Mode.DRAW);
-        canvas.setPaintStrokeColor(Color.BLACK);
+    @OnClick(R.id.button_color)
+    public void onClickButtonColor(View v) {
+        ColorPickerDialogBuilder
+                .with(this)
+                .setTitle("Choose color")
+                //.initialColor(Color.BLACK)
+                .wheelType(ColorPickerView.WHEEL_TYPE.CIRCLE)
+                .density(12)
+                .setOnColorSelectedListener(new OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(int selectedColor) {
+                        Log.i("Chase", "onColorSelected: 0x" + Integer.toHexString(selectedColor));
+                    }
+                })
+                .setPositiveButton("ok", new ColorPickerClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                        canvas.setMode(CanvasView.Mode.DRAW);
+                        canvas.setPaintStrokeColor(selectedColor);
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .build()
+                .show();
     }
-    @OnClick(R.id.button_color_red)
-    public void onClickButtonRed(View v) {
-        canvas.setMode(CanvasView.Mode.DRAW);
-        canvas.setPaintStrokeColor(Color.RED);
-    }
-    @OnClick(R.id.button_color_blue)
-    public void onClickButtonBlue(View v) {
-        canvas.setMode(CanvasView.Mode.DRAW);
-        canvas.setPaintStrokeColor(Color.BLUE);
-    }
+
     @OnClick(R.id.button_eraser)
     public void onClickButtonEraser(View v) {
         canvas.setMode(CanvasView.Mode.ERASER);

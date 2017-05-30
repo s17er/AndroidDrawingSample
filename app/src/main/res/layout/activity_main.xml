@@ -16,22 +16,10 @@
         android:orientation="horizontal"
         >
         <Button
-            android:id="@+id/button_color_red"
-            android:layout_width="48dp"
+            android:id="@+id/button_color"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="赤"
-            />
-        <Button
-            android:id="@+id/button_color_blue"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="青"
-            />
-        <Button
-            android:id="@+id/button_color_black"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="黒"
+            android:text="color"
             />
         <Button
             android:id="@+id/button_eraser"

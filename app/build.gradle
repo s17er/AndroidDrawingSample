@@ -29,5 +29,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'com.jakewharton:butterknife:7.+'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
+
+    // not use
     compile 'com.rm:freedrawview:1.0.2'
 }
